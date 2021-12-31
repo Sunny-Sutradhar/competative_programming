@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 # define INF 9999999
 
 typedef pair<int, int> edgeWeightPair;
@@ -8,15 +9,12 @@ class Graph
 {
     int V;
     list<edgeWeightPair> *adj;
-    vector<int> dist;
 
 public:
     Graph(int V) ///Constructer
     {
         this->V = V;
         adj = new list<edgeWeightPair> [V];
-        vector<int> temp(V,INF);
-        dist = temp;
     }
     void addEdge(int u, int v, int w) ///adjacency List Development
     {
@@ -26,7 +24,7 @@ public:
     void Dijkstra(int src)
     {
         priority_queue< edgeWeightPair, vector <edgeWeightPair> , greater<edgeWeightPair> > pq;
-        //vector<int> dist(V, INF); /// iiii
+        vector<int> dist(V, INF);
         ///vector<int> parent(V, -1);
         pq.push(make_pair(0, src));
         dist[src] = 0;
@@ -47,43 +45,31 @@ public:
                 }
             }
         }
-    
-    }
-    int minimumCost(int x){
-         return dist[x];
+        printf("Vertex Distance from Source: \n");
+        for (int i = 0; i < V; ++i)
+            printf("%d  ----------->  %d\n", i, dist[i]);
     }
 };
+int main()
+{
+    int V = 9;
+    Graph g(V);
+    g.addEdge(0, 1, 4);
+    g.addEdge(0, 7, 8);
+    g.addEdge(1, 2, 8);
+    g.addEdge(1, 7, 11);
+    g.addEdge(2, 3, 7);
+    g.addEdge(2, 8, 2);
+    g.addEdge(2, 5, 4);
+    g.addEdge(3, 4, 9);
+    g.addEdge(3, 5, 14);
+    g.addEdge(4, 5, 10);
+    g.addEdge(5, 6, 2);
+    g.addEdge(6, 7, 1);
+    g.addEdge(6, 8, 6);
+    g.addEdge(7, 8, 7);
 
-int main(){
-    int t;
-    cin>>t;
+    g.Dijkstra(0);
 
-    while(t--){
-        int n,m;
-        cin>>n>>m;
-        Graph g(n);
-        int x,y,c;
-        for(int i=0;i<m;i++){
-           cin>>x>>y>>c;
-           //cout<<x-1<<" "<<y-1<<" "<<c<<endl; 
-           g.addEdge(x-1,y-1,c);
-        }
-
-        g.Dijkstra(0);
-
-        int q;
-        cin>>q;
-        while(q--){
-            int a,k;
-            cin>>a>>k;
-            int cost = g.minimumCost(a-1);
-            cost*=2;
-            if(cost>=k)cout<<0<<endl;
-            else{
-               cout<<k-cost<<endl;
-            }
-
-        }
-
-    }
+    return 0;
 }
