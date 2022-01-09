@@ -6,8 +6,8 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-
-
+ 
+ 
 int main(){
     int t;
     cin>>t;
@@ -25,10 +25,7 @@ int main(){
        for(int i=0;i<n;i++){
          map[a[i]]++;
        }
-       avg = sum/(n*1.0);
-       avg *= (n-2);
-       //cout<<avg<<endl;
-       //cout<<(int)avg<<endl;
+      
        if((2*sum)%n!=0){
          cout<<"0"<<endl;
        }
@@ -41,15 +38,13 @@ int main(){
                 counter += it->second; 
                if(find-a[i] == a[i])counter--;
              }
-             map[a[i]] --;
-             
-             
+             map[a[i]] --;            
          }
          cout<<counter<<endl;
           
        }
-
-
-
+ 
+ 
+ 
     }
 }
