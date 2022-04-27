@@ -1,55 +1,58 @@
-/***
+/******
  * Author : Sunny Sutradhar
- * Date : 09/01/2022 
- ***/
-
-
+ * Date   : 22/04/2022 
+ ******/
 #include<bits/stdc++.h>
 using namespace std;
+typedef long long int ll;
+typedef unsigned long long int ull;
+typedef char node_type;
+
 
 
 int main(){
     int t;
     cin>>t;
     while(t--){
-       int n;
-       cin>>n;
-       long long int a[n],sum=0,find,counter;
-       double avg;
-       std::map<long long int, int> map;
-       for(int i=0;i<n;i++){
-          cin>>a[i];
-          sum+=a[i];
-          map.insert({a[i],0});
-       }
-       for(int i=0;i<n;i++){
-         map[a[i]]++;
-       }
-       avg = sum/(n*1.0);
-       avg *= (n-2);
-       //cout<<avg<<endl;
-       //cout<<(int)avg<<endl;
-       if((2*sum)%n!=0){
-         cout<<"0"<<endl;
-       }
-       else{
-         find = 2*sum/n ;
-         counter = 0;
-         for(int i=0;i<n;i++){
-             auto it = map.find(find - a[i]);
-             if(it != map.end()){
-                counter += it->second; 
-               if(find-a[i] == a[i])counter--;
-             }
-             map[a[i]] --;
-             
-             
-         }
-         cout<<counter<<endl;
-          
-       }
+        int n;
+        cin>>n;
+        ll a[n];
+        ll count=0,l=-1,s=-1,k,m;
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+        for(int i=0;i<n-1;i++){
+            if(a[i]==a[i+1]){
+               count++;
+               //break;
+            }
+        }
+        if(count<=1){
+            cout<<count<<endl;
+        }else{
+            count = 0;
+            for(int i=0;i<n-1;i++){
+                if(a[i]==a[i+1]){
+                   l = i;
+                   s= i+1;
+                  break;
+                }
+            }
+            for(int i = n-1;i>0;i--){
+                 if(a[i]==a[i-1]){
+                    k = i-1;
+                    m = i;
+                 break;
 
-
-
+               }
+            }
+            //cout<<l<<" "<<s<<endl;
+            //cout<<k<<" "<<m<<endl;
+            if(s==k)cout<<1<<endl;
+            else{
+                cout<<k-s<<endl;
+            }
+            
+        }
     }
 }
