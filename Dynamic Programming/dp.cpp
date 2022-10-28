@@ -7,56 +7,31 @@ using namespace std;
 typedef long long int ll;
 typedef unsigned long long int ull;
 
+int dp[1000000];
 
+int factorial(){
+    dp[1] = 1;
+    dp[2] = 2;
 
-bool isPrime(int n)
-{
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
-            return false;
-        }
+    for(int i=3;i<100001;i++){
+        dp[i] = i*dp[i-1];
     }
-    return true;
 }
 
 
-int printMinCountPrime(int N)
-{
-
-    int minCount;
-
-    // Case 1:
-    if (isPrime(N)) {
-        minCount = 1;
-    }
-
-    // Case 2:
-    else if (N % 2 == 0) {
-        minCount = 2;
-    }
-
-    // Case 3:
-    else {
-
-        // Case 3a:
-        if (isPrime(N - 2)) {
-            minCount = 2;
-        }
-
-        // Case 3b:
-        else {
-            minCount = 3;
-        }
-    }
-
-    cout << minCount << endl;
-}
 
 
 int main()
 {
-    int N = 100;
+    int t;
+    factorial();
+    cin>>t;
+    
+    while(t--){
+        int n;
+        cin>>n;
+        cout<<dp[n]<<endl;
+    }
 
-    printMinCountPrime(N);
-    return 0;
+
 }
